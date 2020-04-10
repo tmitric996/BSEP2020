@@ -1,4 +1,4 @@
-package Enumeration;
+package com.example.bsep2020.Enumeration;
 
 public enum EntityType {
 

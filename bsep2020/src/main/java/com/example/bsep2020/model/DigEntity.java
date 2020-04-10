@@ -1,8 +1,9 @@
-package model;
+package com.example.bsep2020.model;
 
 import javax.persistence.*;
 
-import Enumeration.EntityType;
+import com.example.bsep2020.Enumeration.EntityType;
+
 import lombok.*;
 /*
  digitalni entitet, odnosno podaci o domenu kom ce se izdavati sertifikat 

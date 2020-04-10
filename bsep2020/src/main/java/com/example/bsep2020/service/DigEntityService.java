@@ -1,10 +1,10 @@
-package service;
+package com.example.bsep2020.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import model.DigEntity;
-import repository.DigEntityRepository;
+import com.example.bsep2020.model.DigEntity;
+import com.example.bsep2020.repository.DigEntityRepository;
 
 @Service
 public class DigEntityService {

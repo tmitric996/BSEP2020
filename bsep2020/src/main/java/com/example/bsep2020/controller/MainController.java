@@ -1,4 +1,4 @@
-package controller;
+package com.example.bsep2020.controller;
 
 import javax.validation.Valid;
 
@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import model.Admin;
-import model.DigEntity;
-import service.AdminService;
-import service.DigEntityService;
+import com.example.bsep2020.model.Admin;
+import com.example.bsep2020.model.DigEntity;
+import com.example.bsep2020.service.AdminService;
+import com.example.bsep2020.service.DigEntityService;
 
 @RestController
 @RequestMapping("/demo") 

@@ -1,4 +1,4 @@
-package model;
+package com.example.bsep2020.model;
 
 import javax.persistence.*;
 
