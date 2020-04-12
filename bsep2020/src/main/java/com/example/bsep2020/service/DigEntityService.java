@@ -1,18 +1,14 @@
 package com.example.bsep2020.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.util.List;
 import com.example.bsep2020.model.DigEntity;
-import com.example.bsep2020.repository.DigEntityRepository;
 
-@Service
-public class DigEntityService {
+public interface DigEntityService {
 
-	@Autowired
-	DigEntityRepository digEntityRepository;
-
-	public DigEntity save(DigEntity digEntity) {
-		return digEntityRepository.save(digEntity);
-	}
+	public DigEntity saveEntity(DigEntity digEntity);
+	public DigEntity findOneEntity(Long entId);
+	public List<DigEntity> findAllEntities();
+	public void deleteEntity(DigEntity digEntity);
+	
+	
 }

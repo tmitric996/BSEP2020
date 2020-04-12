@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EntityScan( basePackages = {"model"} )
+@EntityScan( basePackages = {"com.example.bsep2020.model"} )
 public class Bsep2020Application {
 
 	public static void main(String[] args) {

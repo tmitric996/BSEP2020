@@ -2,7 +2,7 @@ package com.example.bsep2020.model;
 
 import javax.persistence.*;
 
-import com.example.bsep2020.Enumeration.EntityType;
+import com.example.bsep2020.enumeration.EntityType;
 
 import lombok.*;
 /*
@@ -17,10 +17,11 @@ import lombok.*;
 public class DigEntity {
 	
 	@Id
+	@Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name="commonname", nullable=false, unique=true)
+	@Column(nullable=false, unique=true)
 	public String commonName;
 	
 	@Enumerated
@@ -45,6 +46,11 @@ public class DigEntity {
 	//   email address in Verisign certificates
 	@Column
 	private String email;
+
+	public DigEntity() {
+		super();
+	}
+	
 	
 	
 	
