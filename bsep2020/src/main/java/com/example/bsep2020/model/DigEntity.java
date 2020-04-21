@@ -14,6 +14,7 @@ import lombok.*;
 @Entity
 @Table(name="digEntity")
 @AllArgsConstructor
+@NoArgsConstructor
 public class DigEntity {
 	
 	@Id
