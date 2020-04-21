@@ -47,9 +47,6 @@ public class DigEntity {
 	@Column
 	private String email;
 
-	public DigEntity() {
-		super();
-	}
 	
 	
 	

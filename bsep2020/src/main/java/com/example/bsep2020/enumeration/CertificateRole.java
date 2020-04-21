@@ -1,7 +1,7 @@
 package com.example.bsep2020.enumeration;
 
 public enum CertificateRole {
-	ROOT,
+	SELF_SIGNED,
     INTERMEDIATE,
     END_ENTITY
 }

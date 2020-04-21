@@ -12,15 +12,15 @@ import lombok.*;
 @AllArgsConstructor
 public class IssuerData {
 
-	private Long id;
 	private X500Name x500name;
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
 
 
-	public IssuerData(PrivateKey privateKey, X500Name x500name) {
+	public IssuerData(PrivateKey privateKey, PublicKey publicKey, X500Name x500name) {
 		this.x500name = x500name;
 		this.privateKey = privateKey;
+		this.publicKey = publicKey;
 	}
 
 	

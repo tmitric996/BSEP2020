@@ -13,7 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 public class SubjectData {
 	
-	private Long ig;
 	private X500Name x500name;
 	private PrivateKey privateKey;
 	private PublicKey publicKey;

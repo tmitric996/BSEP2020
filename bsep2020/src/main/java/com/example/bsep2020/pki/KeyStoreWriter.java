@@ -1,5 +1,6 @@
 package com.example.bsep2020.pki;
-
+//mislim da sene koristi nigde klasa
+//msm koristila se, ali sam je ubacila u servis
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,12 +13,16 @@ import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 public class KeyStoreWriter {
 	//KeyStore je Java klasa za citanje specijalizovanih datoteka koje se koriste za cuvanje kljuceva
 	//Tri tipa entiteta koji se obicno nalaze u ovakvim datotekama su:
 	// - Sertifikati koji ukljucuju javni kljuc
 	// - Privatni kljucevi
 	// - Tajni kljucevi, koji se koriste u simetricnima siframa
+
 	private KeyStore keyStore;
 	
 	public KeyStoreWriter() {
@@ -31,6 +36,7 @@ public class KeyStoreWriter {
 	}
 	//Ako je cilj kreirati novi KeyStore poziva se i dalje load, pri cemu je prvi parametar null
 	//Ako je cilj kreirati novi KeyStore poziva se i dalje load, pri cemu je prvi parametar null
+
 
 	public void loadKeyStore(String fileName, char[] password) {
 		try {
@@ -67,6 +73,7 @@ public class KeyStoreWriter {
 		}
 	}
 	
+
 	public void write(String alias, PrivateKey privateKey, char[] password, Certificate certificate) {
 		try {
 			keyStore.setKeyEntry(alias, privateKey, password, new Certificate[] {certificate});
