@@ -25,10 +25,15 @@ public class DigEntity {
 	@Column(nullable=false, unique=true)
 	public String commonName;
 	
+	//privremeno
+	@Column(nullable=false)
+	public String entityType;
+	
+	/*
 	@Enumerated
 	public EntityType entityType;
 	//zavisno kog je tipa entitet neka polja ce biti prazna...ali neka polja ce uvek biti popunjena poput commonname cn i sl
-	
+	*/
 	@Column
 	private String surName;
 	

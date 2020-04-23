@@ -20,8 +20,6 @@ import com.example.bsep2020.service.AdminService;
 import com.example.bsep2020.service.DigEntityService;
 
 
-
-
 @RestController
 @RequestMapping("/demo") 
 public class MainController {

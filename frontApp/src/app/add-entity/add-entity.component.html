@@ -1,0 +1,91 @@
+<h3>Create Entity</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="entitysaveform" #saveentity (ngSubmit)="saveEntity(saveEntity)">
+          <div class="form-group">
+              <label for="name">Entity Common Name</label>
+              <input type="text" class="form-control"  formControlName="entity_commonName" data-toggle="tooltip" 
+                 data-placement="right" title="Enter Entity Name" >
+              <div class="alert alert-danger" *ngIf = "(EntityCommonName.touched) && (EntityCommonName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="EntityCommonName.errors.required">Entity Common Name is Required</span>
+                    <span *ngIf = "EntityCommonName.errors.minlength"> 
+                        MinLength Error 
+                    </span>                   
+                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="branch">Entity Type</label>
+              <select class="form-control" formControlName="entity_type" data-toggle="tooltip" 
+                    data-placement="right" title="Select Entity Type">
+                <option value="null">--Select Type--</option>
+                <option value="USER">USER</option>
+                <option value="SERVICE">SERVICE</option>
+                <option value="SUBSYSTEM">SUBSYSTEM</option>
+              </select>
+        </div>
+
+            <div class="form-group">
+                <label for="name">Entity Surname</label>
+                <input type="text" class="form-control" formControlName="entity_surname" 
+                data-toggle="tooltip" data-placement="right" title="Enter Entity Surname">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Entity Given Name</label>
+                <input type="text" class="form-control" formControlName="entity_givenName" 
+                data-toggle="tooltip" data-placement="right" title="Enter Entity Given Name">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Entity Organization</label>
+                <input type="text" class="form-control" formControlName="entity_organization" 
+                data-toggle="tooltip" data-placement="right" title="Enter Entity Organization">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Entity Organization Unit Name</label>
+                <input type="text" class="form-control" formControlName="entity_orgUnitName" 
+                data-toggle="tooltip" data-placement="right" title="Enter Entity Organization Unit Name">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Entity Country Code</label>
+                <input type="text" class="form-control" formControlName="entity_countryCode" 
+                data-toggle="tooltip" data-placement="right" title="Enter Entity Country Code">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Entity Email</label>
+                <input type="text" class="form-control" formControlName="entity_email" 
+                    data-toggle="tooltip" data-placement="right" title="Enter Entity Email">
+                    <div class="alert alert-danger" *ngIf = "(EntityEmail.touched) && (EntityEmail.invalid)" 
+                    style="margin-top: 5px;">
+                    <span *ngIf="EntityEmail.errors.required">Entity Email is Required</span>
+                        <span *ngIf = "EntityEmail.errors.email"> 
+                            Invalid Email Format 
+                        </span>                   
+                    </div>
+            </div>
+    
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+      <div [hidden]="!submitted">
+         <h4>Entity Added SuccessFully!</h4>
+         <button (click)="addEntityForm()" class='btn btn-primary'>Add More Entities</button>
+      </div>      
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+
