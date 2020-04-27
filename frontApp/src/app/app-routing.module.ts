@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EntityListComponent } from './entity-list/entity-list.component';
-import { AddEntityComponent } from './add-entity/add-entity.component';
+import { CertificateSubjectListComponent } from '@components/certificate-subject-list/certificate-subject-list.component';
+import { AddCertificateSubjectComponent } from '@components/add-certificate-subject/add-certificate-subject.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo:'view-entity', pathMatch:'full' },
-  { path: 'view-entity', component:EntityListComponent },
-  { path: 'add-entity', component:AddEntityComponent },
+  { path: '', redirectTo:'subjects', pathMatch:'full' },
+  { path: 'subjects', component: CertificateSubjectListComponent },
+  { path: 'subjects/create', component: AddCertificateSubjectComponent },
 ];
 
 @NgModule({

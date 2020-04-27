@@ -1,0 +1,85 @@
+<h3>Create certificate subject</h3>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="submitted" style="width: 400px;">
+            <form [formGroup]="certificateSubjectForm" #saveentity (ngSubmit)="save()">
+                <div class="form-group">
+                    <label for="name">Common Name</label>
+                    <input type="text" class="form-control" formControlName="commonName" data-toggle="tooltip"
+                        data-placement="right" title="Enter Name">
+
+                    <div class="alert alert-danger" *ngIf="certificateSubjectForm.controls.commonName.touched && certificateSubjectForm.controls.commonName.invalid">
+                        <span *ngIf="certificateSubjectForm.controls['commonName'].errors.minLength">Common Name Min Length is 5</span>
+
+                        <span *ngIf="certificateSubjectForm.controls['commonName'].errors.required">Common Name is
+                            Required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Type</label>
+                    <select class="form-control" formControlName="type" data-toggle="tooltip" data-placement="right"
+                        title="Select Type">
+                        <option value="null">--Select Type--</option>
+                        <option value="USER">User</option>
+                        <option value="SERVICE">SERVICE</option>
+                        <option value="SUBSYSTEM">SUBSYSTEM</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Surname</label>
+                    <input type="text" class="form-control" formControlName="surname" data-toggle="tooltip"
+                        data-placement="right" title="Enter Surname">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Given Name</label>
+                    <input type="text" class="form-control" formControlName="givenName" data-toggle="tooltip"
+                        data-placement="right" title="Enter Given Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Organization</label>
+                    <input type="text" class="form-control" formControlName="organization" data-toggle="tooltip"
+                        data-placement="right" title="Enter Organization">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Organization Unit Name</label>
+                    <input type="text" class="form-control" formControlName="organizationUnitName" data-toggle="tooltip"
+                        data-placement="right" title="Enter Organization Unit Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Country Code</label>
+                    <input type="text" class="form-control" formControlName="countryCode" data-toggle="tooltip"
+                        data-placement="right" title="Enter Country Code">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Email</label>
+                    <input type="text" class="form-control" formControlName="email" data-toggle="tooltip"
+                        data-placement="right" title="Enter Email">
+                    <div class="alert alert-danger" style="margin-top: 5px;">
+                        <span *ngIf="hasError('email', 'required')">Email is Required</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="!submitted">
+            <h4>Entity Added SuccessFully!</h4>
+            <button (click)="addEntityForm()" class='btn btn-primary'>Add More Entities</button>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
