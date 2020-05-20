@@ -45,10 +45,10 @@ public class CertificateGenerator {
 
 			//Formira se objekat koji ce sadrzati privatni kljuc i koji ce se koristiti za potpisivanje sertifikata
 			ContentSigner contentSigner = builder.build(idata.getPrivateKey());
-
+			
 			//Postavljaju se podaci za generisanje sertifiakta
 			X509v3CertificateBuilder certGen = new JcaX509v3CertificateBuilder(idata.getX500name(),
-					new BigInteger(sdata.getSerialNumber()),
+					new BigInteger(Integer.toString(sdata.getSerialNumber())),
 					sdata.getStartDate(),
 					sdata.getEndDate(),
 					sdata.getX500name(),

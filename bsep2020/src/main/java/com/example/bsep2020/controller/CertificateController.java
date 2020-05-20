@@ -37,11 +37,27 @@ public class CertificateController {
 	
 	@PostMapping("/writess")
 	public void writeSelfSignedCert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
-		certService.createrootCert(digEntity);
+		certService.createSelfSignedCertificate(digEntity);
 	}
 
+	@PostMapping("/writeint")
+	public void writeCACert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
+		//privremena metoda
+		int SNIssuer = 1;
+		boolean canIssueCA=false;
+		certService.createCACert(digEntity, SNIssuer, canIssueCA);
+	}
+	
+	@PostMapping("/writeee")
+	public void writeCert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
+		//privremena metoda
+		int SNIssuer = 2;
+		certService.createCertificate(digEntity, SNIssuer);
+	}
+	
 	@PostMapping("/readcert")
 	public void readCertificate(@Valid @RequestBody String keyStoreFile, String keyStorePass, String alias) {
 		keyStoreService.readCertificate(keyStoreFile, keyStorePass, alias);
 	}
+	
 }

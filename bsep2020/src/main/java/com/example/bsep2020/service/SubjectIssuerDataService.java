@@ -11,7 +11,8 @@ public interface SubjectIssuerDataService {
 
 	IssuerData generateIssuerData(DigEntity digentity);
 	
-	SubjectData generateSubjectData(DigEntity digentity);
 
 	KeyPair generateKeyPair();
+
+	SubjectData generateSubjectData(DigEntity digentity, int sernum);
 }

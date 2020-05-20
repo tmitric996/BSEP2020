@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.bsep2020.model.Admin;
 import com.example.bsep2020.model.DigEntity;
+import com.example.bsep2020.model.OCSPTable;
 import com.example.bsep2020.service.AdminService;
 import com.example.bsep2020.service.DigEntityService;
+import com.example.bsep2020.service.OCSPService;
 
 
 @RestController
@@ -68,12 +70,13 @@ public class MainController {
 		return ResponseEntity.ok().body(de);	
 	}
 	
+	@Autowired
+	OCSPService ocspService;
 	
-	
-	
-	
-	
-	
+	@PostMapping("/newocsp")
+	public OCSPTable addToOCSP(@Valid @RequestBody OCSPTable ocspTable) {
+		return ocspService.saveOCSP(ocspTable);
+	}
 	
 	  
 }

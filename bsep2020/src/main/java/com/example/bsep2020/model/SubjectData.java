@@ -16,11 +16,18 @@ public class SubjectData {
 	private X500Name x500name;
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
-	private String SerialNumber;
-	private Date EndDate;
-	private Date StartDate;
+	private int SerialNumber;
+	private java.util.Date EndDate;
+	private java.util.Date StartDate;
 	
-	
+	public SubjectData(PublicKey publicKey, PrivateKey privkey, X500Name x500name, int SerialNumber, java.util.Date startDate2, java.util.Date endDate2) {
+		this.EndDate=endDate2;
+		this.privateKey=privkey;
+		this.publicKey=publicKey;
+		this.x500name=x500name;
+		this.SerialNumber=SerialNumber;
+		this.StartDate=startDate2;
+	}
 	
 
 }

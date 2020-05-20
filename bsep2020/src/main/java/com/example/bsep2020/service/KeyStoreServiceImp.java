@@ -119,10 +119,9 @@ public class KeyStoreServiceImp implements KeyStoreService{
 			Certificate cert = keyStore.getCertificate(alias);
 			//Iscitava se privatni kljuc vezan za javni kljuc koji se nalazi na sertifikatu sa datim aliasom
 			PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, keyPass);
-			PublicKey pubKey = (PublicKey) keyStore.getKey(alias, keyPass);
-
+			
 			X500Name issuerName = new JcaX509CertificateHolder((X509Certificate) cert).getSubject();
-			return new IssuerData(privKey, pubKey, issuerName);
+			return new IssuerData(privKey, null, issuerName);
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

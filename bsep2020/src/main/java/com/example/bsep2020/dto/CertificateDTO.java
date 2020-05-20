@@ -20,8 +20,8 @@ public class CertificateDTO {
 	private String serialNumber;
 	private CertificateRole certRole; //ssigned, intrem, endentyty
 	private Status certStatus; //valid or revoken
-	private IssuerData issuerData;
-	private SubjectData subjectData;
+	private IssuerDTO issuerDTO;
+	private SubjectDTO subjectDTO;
 	
 	
 }
