@@ -32,10 +32,10 @@ public class SubjectIssuerDataServiceImp implements SubjectIssuerDataService{
 	public IssuerData generateIssuerData(DigEntity digentity) {
 		X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
 	    builder.addRDN(BCStyle.CN, digentity.getCommonName());
-	    builder.addRDN(BCStyle.SURNAME, digentity.getSurName());
+	    builder.addRDN(BCStyle.SURNAME, digentity.getSurname());
 	    builder.addRDN(BCStyle.GIVENNAME, digentity.getGivenName());
 	    builder.addRDN(BCStyle.O, digentity.getOrganization());
-	    builder.addRDN(BCStyle.OU, digentity.getOrgUnitName());
+	    builder.addRDN(BCStyle.OU, digentity.getOrganizationUnitName());
 	    builder.addRDN(BCStyle.C, digentity.getCountryCode());
 	    builder.addRDN(BCStyle.E, digentity.getEmail());
 	    
@@ -66,10 +66,10 @@ public class SubjectIssuerDataServiceImp implements SubjectIssuerDataService{
 			
 			X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
 		    builder.addRDN(BCStyle.CN, digentity.getCommonName());
-		    builder.addRDN(BCStyle.SURNAME, digentity.getSurName());
+		    builder.addRDN(BCStyle.SURNAME, digentity.getSurname());
 		    builder.addRDN(BCStyle.GIVENNAME, digentity.getGivenName());
 		    builder.addRDN(BCStyle.O, digentity.getOrganization());
-		    builder.addRDN(BCStyle.OU, digentity.getOrgUnitName());
+		    builder.addRDN(BCStyle.OU, digentity.getOrganizationUnitName());
 		    builder.addRDN(BCStyle.C, digentity.getCountryCode());
 		    builder.addRDN(BCStyle.E, digentity.getEmail());
 		    
