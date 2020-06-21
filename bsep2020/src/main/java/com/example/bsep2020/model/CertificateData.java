@@ -28,6 +28,7 @@ public class CertificateData {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
+	@NotNull(message = "Obavezno polje!")
 	private int serialNumber;
 	
 	

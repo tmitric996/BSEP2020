@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bsep2020.model.CertificateData;
 import com.example.bsep2020.repository.CertificateDataRepository;
+import com.example.bsep2020.security.CertificateDataValidator;
 
 @Service
 public class CertificateDataServiceImp implements CertificateDataService {
@@ -17,7 +18,13 @@ public class CertificateDataServiceImp implements CertificateDataService {
 	
 	@Override
 	public CertificateData saveCertificateData(CertificateData certData) {
-		return certDataRepository.save(certData);
+		if(CertificateDataValidator.isStringOnlyAlphabet(certData.getIssuerName()) &&
+		   CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())) {
+			return certDataRepository.save(certData);
+		}else {
+			throw new IllegalArgumentException("Lose popunjena polja!");
+		}
+		
 	}
 	
 	@Transactional(readOnly = true)
