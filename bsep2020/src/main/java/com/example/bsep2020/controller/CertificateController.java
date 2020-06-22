@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.bouncycastle.cert.CertIOException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,6 +55,13 @@ public class CertificateController {
 		int SNIssuer = 2;
 		certService.createCertificate(digEntity, SNIssuer);
 	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping("/secured")
+	public String securedHello() {
+		return "secured hello";
+	}
+	
 	
 	@PostMapping("/readcert")
 	public void readCertificate(@Valid @RequestBody String keyStoreFile, String keyStorePass, String alias) {
