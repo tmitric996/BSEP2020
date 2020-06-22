@@ -14,20 +14,24 @@ import com.example.bsep2020.security.DigEntityValidator;
 public class DigEntityServiceImp implements DigEntityService {
 
 	@Autowired
-	 DigEntityRepository digEntityRepo;
+	DigEntityRepository digEntityRepo;
 
 	@Override
 	public DigEntity saveEntity(DigEntity digEntity) {
-		if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getCommonName()) &&
-				DigEntityValidator.isStringOnlyAlphabet(digEntity.getSurname()) &&
-				DigEntityValidator.isStringOnlyAlphabet(digEntity.getGivenName()) &&
-				DigEntityValidator.isStringOnlyAlphabet(digEntity.getOrganization()) &&
-				DigEntityValidator.isStringOnlyAlphabet(digEntity.getOrganizationUnitName())) {
-			
-			return digEntityRepo.save(digEntity);
-		} else {
-			throw new IllegalArgumentException("Lose popunjena polja!");
+		if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getCommonName())) {
+			System.out.println("Potrebno je uneti samo slova!");
+		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getSurname())) {
+			System.out.println("Potrebno je uneti samo slova!");
+		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getGivenName())) {
+			System.out.println("Potrebno je uneti samo slova!");
+		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getOrganization())) {
+			System.out.println("Potrebno je uneti samo slova!");
+		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getOrganizationUnitName())) {
+			System.out.println("Potrebno je uneti samo slova!");
 		}
+
+		return digEntityRepo.save(digEntity);
+
 	}
 
 	@Transactional(readOnly = true)

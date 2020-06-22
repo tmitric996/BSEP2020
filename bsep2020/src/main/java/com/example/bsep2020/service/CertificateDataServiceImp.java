@@ -18,13 +18,13 @@ public class CertificateDataServiceImp implements CertificateDataService {
 	
 	@Override
 	public CertificateData saveCertificateData(CertificateData certData) {
-		if(CertificateDataValidator.isStringOnlyAlphabet(certData.getIssuerName()) &&
-		   CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())) {
-			return certDataRepository.save(certData);
-		}else {
-			throw new IllegalArgumentException("Lose popunjena polja!");
+		if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getIssuerName())) {
+			System.out.println("Potrebno je uneti samo slova!");
+		}else if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())){
+			System.out.println("Potrebno je uneti samo slova!");
 		}
 		
+		return certDataRepository.save(certData);
 	}
 	
 	@Transactional(readOnly = true)
