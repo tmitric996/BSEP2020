@@ -42,7 +42,7 @@ public class SQLiSafeConstraintValidator implements ConstraintValidator<SQLiSafe
 	    private List<Pattern> validationPatterns = getValidationPatterns();
 
 	    @Override
-	    public void initialize(SQLInjectionSafe sqlInjectionSafe) { }
+	    public void initialize(SQLiSafe sqlInjectionSafe) { }
 
 	    @Override
 	    public boolean isValid(String dataString, ConstraintValidatorContext cxt) {
