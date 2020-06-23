@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.bsep2020.model.Admin;
 import com.example.bsep2020.model.DigEntity;
 import com.example.bsep2020.model.OCSPTable;
+import com.example.bsep2020.model.Users;
+import com.example.bsep2020.repository.UserRepository;
 import com.example.bsep2020.service.AdminService;
+import com.example.bsep2020.service.CustomUserDetailServiceImpl;
 import com.example.bsep2020.service.DigEntityService;
 import com.example.bsep2020.service.OCSPService;
+import com.example.bsep2020.service.UserService;
 
 
 @RestController
@@ -78,5 +83,12 @@ public class MainController {
 		return ocspService.saveOCSP(ocspTable);
 	}
 	
+	@Autowired
+	UserService userService;
+	
+	@PostMapping("/newuser")
+	public void addUser(@Valid @RequestBody Users user) {
+		userService.save(user);
+	}
 	  
 }

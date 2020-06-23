@@ -21,7 +21,6 @@ import javax.validation.constraints.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class CertificateData {
 

@@ -15,8 +15,6 @@ import lombok.*;
 @Data
 @Entity
 @Table(name="digEntity")
-@AllArgsConstructor
-@NoArgsConstructor
 public class DigEntity {
 	
 	
