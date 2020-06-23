@@ -24,7 +24,6 @@ public class DigEntity {
 	@Id
 	@Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "Obavezno polje!")
     private Long id;
 	
 	@Column
