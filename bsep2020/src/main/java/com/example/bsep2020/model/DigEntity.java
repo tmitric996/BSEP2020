@@ -28,14 +28,23 @@ public class DigEntity {
 	@NotNull(message = "Obavezno polje!")
 	public String commonName;
 	
+	//privremeno
+	@Column(nullable=false)
+	public String entityType;
+	
+	/*
 	@Enumerated
 	@NotNull(message = "Obavezno polje!")
 	public EntityType entityType;
 	//zavisno kog je tipa entitet neka polja ce biti prazna...ali neka polja ce uvek biti popunjena poput commonname cn i sl
-	
+	*/
 	@Column
+<<<<<<< HEAD
 	@NotNull
 	private String surname;
+=======
+	private String surName;
+>>>>>>> parent of 464f9e4... ispravke
 	
 	@Column
 	private String givenName;
@@ -45,8 +54,12 @@ public class DigEntity {
 	private String organization;
 	
 	@Column
+<<<<<<< HEAD
 	@NotNull(message = "Obavezno polje!")
 	private String organizationUnitName;
+=======
+	private String orgUnitName;
+>>>>>>> parent of 464f9e4... ispravke
 	
 	@Column
 	@Size(max = 2, message = "Potrebno je uneti samo dva slova!")
