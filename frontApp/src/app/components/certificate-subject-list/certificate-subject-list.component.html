@@ -19,7 +19,7 @@
             <thead class="thead-light">
                 <tr>
                     <th> Common Name </th>
-                    <th> Type </th>
+                    <th> Entity Type </th>
                     <th> Surname </th>
                     <th> Given Name </th>
                     <th> Organization </th>
@@ -33,11 +33,11 @@
             <tbody>
                 <tr *ngFor="let subject of certificateSubjects ">
                     <td>{{subject.commonName}}</td>
-                    <td>{{subject.type}}</td>
+                    <td>{{subject.entityType}}</td>
                     <td>{{subject.surname}}</td>
                     <td>{{subject.givenName}}</td>
                     <td>{{subject.organization}}</td>
-                    <td>{{subject.orgUnitName}}</td>
+                    <td>{{subject.organizationUnitName}}</td>
                     <td>{{subject.countryCode}}</td>
                     <td>{{subject.email}}</td>
 

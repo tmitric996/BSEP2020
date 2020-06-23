@@ -1,7 +1,7 @@
 export class CertificateSubject {
     id:number;
     commonName:String;
-    type:String;
+    entityType:String;
     surname:String;
     givenName:String;
     organization:String;
