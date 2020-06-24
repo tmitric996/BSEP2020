@@ -37,23 +37,24 @@ public class CertificateController {
 	KeyStoreServiceImp keyStoreService;
 	
 	@PostMapping("/writess")
-	public void writeSelfSignedCert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
-		certService.createSelfSignedCertificate(digEntity);
+	public void writeSelfSignedCert(@Valid @RequestBody Long id) throws Exception {
+		certService.createSelfSignedCertificate(id);
 	}
 
 	@PostMapping("/writeint")
-	public void writeCACert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
+	public void writeCACert(@Valid @RequestBody Long id) throws Exception {
 		//privremena metoda
 		int SNIssuer = 1;
 		boolean canIssueCA=false;
-		certService.createCACert(digEntity, SNIssuer, canIssueCA);
+		certService.createCACert(id, SNIssuer, canIssueCA);
 	}
 	
 	@PostMapping("/writeee")
-	public void writeCert(@Valid @RequestBody DigEntity digEntity ) throws Exception {
+	public void writeCert(@Valid @RequestBody Long id ) throws Exception {
 		//privremena metoda
+		System.out.println(id);
 		int SNIssuer = 2;
-		certService.createCertificate(digEntity, SNIssuer);
+		certService.createCertificate(id, SNIssuer);
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
@@ -65,6 +66,11 @@ public class CertificateController {
 	
 	@PostMapping("/readcert")
 	public void readCertificate(@Valid @RequestBody String keyStoreFile, String keyStorePass, String alias) {
+		//unos da bude te tri stvari razmaknute razmakom
+		String []sp= keyStoreFile.split("\"");
+    	keyStoreFile=sp[1];
+    	keyStorePass=sp[3];
+    	alias=sp[5];
 		keyStoreService.readCertificate(keyStoreFile, keyStorePass, alias);
 	}
 	

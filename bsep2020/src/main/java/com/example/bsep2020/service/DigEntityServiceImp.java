@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bsep2020.model.DigEntity;
 import com.example.bsep2020.repository.DigEntityRepository;
-import com.example.bsep2020.security.DigEntityValidator;
+//import com.example.bsep2020.security.DigEntityValidator;
 
 @Service
 public class DigEntityServiceImp implements DigEntityService {
@@ -18,7 +18,7 @@ public class DigEntityServiceImp implements DigEntityService {
 
 	@Override
 	public DigEntity saveEntity(DigEntity digEntity) {
-		if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getCommonName())) {
+	/*	if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getCommonName())) {
 			System.out.println("Potrebno je uneti samo slova!");
 		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getSurname())) {
 			System.out.println("Potrebno je uneti samo slova!");
@@ -28,7 +28,7 @@ public class DigEntityServiceImp implements DigEntityService {
 			System.out.println("Potrebno je uneti samo slova!");
 		} else if (DigEntityValidator.isStringOnlyAlphabet(digEntity.getOrganizationUnitName())) {
 			System.out.println("Potrebno je uneti samo slova!");
-		}
+		}*/
 
 		return digEntityRepo.save(digEntity);
 

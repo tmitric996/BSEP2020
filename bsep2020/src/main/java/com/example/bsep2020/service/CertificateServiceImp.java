@@ -56,21 +56,35 @@ public class CertificateServiceImp implements CertificateService{
 	static String serialNumber;
 	
 	@Override
-	public void createSelfSignedCertificate(DigEntity digEntity) throws CertIOException, ParseException {
+	public void createSelfSignedCertificate(Long id) throws CertIOException, ParseException {
+		DigEntity digEntity = digEntityService.findOneEntity(id);
+		System.out.println(digEntity.toString());
+		System.out.println("nasao entitet");
 		IssuerData issuerData = subjectIssuerDataService.generateIssuerData(digEntity);
-		X509Certificate certificate = generateSelfSignedCertificate(issuerData);
+		System.out.println("izgenersiao subjiss data");
+		System.out.println(issuerData);
+		CertificateData cd=new CertificateData();
+		System.out.println(cd.getSerialNumber());
+		X509Certificate certificate = generateSelfSignedCertificate(issuerData, cd.getSerialNumber());
+		System.out.println(cd.getSerialNumber());
 		//izgenerisali smo rootCertificat.... i postavili mu serialnumber=0 i end i start date
-		
+		System.out.println("napravio certifi");
+		System.out.println(certificate);
 		char password[]= {'a', 'd', 'm', 'i', 'n'}; //postavljamo password za keystore 
 		KeyStoreDTO ksdto= new KeyStoreDTO();
 		ksdto.setFileName(null);
 		ksdto.setPassword(password);
 		
 		keyStoreService.loadKeyStore(ksdto);
+		System.out.println(cd.getSerialNumber());
 		ksdto.setFileName("selfsigned.jks");
 		String alias="selfsigned"; //postavljamo alias za pristupanje Selfsignedsertifikatu, saljemo njegov pprivatni kljuc, i password za pristupanje keystoru, i sertifikat kojiupisujemo
 		keyStoreService.write(alias, issuerData.getPrivateKey(), password, certificate);
+		System.out.println("upisao ga u jks");
+		System.out.println(cd.getSerialNumber());
 		keyStoreService.saveKeyStore(ksdto);
+		System.out.println("sacuvao jks");
+		System.out.println(cd.getSerialNumber());
 		
 		//postavi ekstenzije... ali to idesu generateSElfSignedCertificate metodi!!!
 		
@@ -80,13 +94,12 @@ public class CertificateServiceImp implements CertificateService{
 		issuersubjectName=issuerData.getX500name().toString();
 		issuersubjectName=issuersubjectName.split(",")[0];
 		issuersubjectName=issuersubjectName.split("=")[1];
-		CertificateData cd=new CertificateData();
+		System.out.println(cd.getSerialNumber());
 		cd.setCA(true);
 		cd.setCanIssueCA(true);
 		cd.setIssuerName(issuersubjectName);
 		cd.setRevoken(false);
 		cd.setRoot(true);
-		cd.setSerialNumber(0);
 		cd.setSubjectName(issuersubjectName);//ovo mora da se ispise jer mu ne upise common name vec mu upisesve
 		cd.setFromDate((java.util.Date) certificate.getNotBefore());
 		cd.setToDate((java.util.Date) certificate.getNotAfter());
@@ -95,8 +108,9 @@ public class CertificateServiceImp implements CertificateService{
 		String modulspk1[] = modulspk[1].split(" ");
 		System.out.println(modulspk1[1].length());
 		cd.setPubKey(issuerData.getPublicKey());
+		System.out.println(cd.getSerialNumber());
 		certDataService.saveCertificateData(cd);
-		System.out.println(issuersubjectName);
+		System.out.println(issuersubjectName  + cd.getSerialNumber());
 		return;
 		
 		
@@ -104,9 +118,9 @@ public class CertificateServiceImp implements CertificateService{
 	
 	
 	@Override
-	public void createCACert(DigEntity subjectEntity, int SNIssuer, boolean canIssueCA) throws CertIOException {
+	public void createCACert(Long id, int SNIssuer, boolean canIssueCA) throws CertIOException {
 		// da se pozove generisanje za sertifikat, da se implementira i pozove get issuerdata da se kreira certificateData, mada to moze da se napravi metoda pa da se poziva, a moze se pozivati
-		
+		DigEntity subjectEntity = digEntityService.findOneEntity(id);
 		//samo za ovaj slucaj kejstore ce biti selfsigned, ali mora ce postojati neka baza, evidencija gde ce se ovi podaci pamtit
 		String keyStoreFile="selfsigned.jks";
 		String alias="selfsigned"; //alias za ovaj sertifikat, tjsertifikatisuera je 
@@ -115,7 +129,7 @@ public class CertificateServiceImp implements CertificateService{
 		CertificateData cd=certDataService.findBySN(SNIssuer);
 		System.out.println("prosao trazeenje isuera");
 		System.out.println(cd.getPubKey());
-		IssuerData id=keyStoreService.readIssuerFromStore(keyStoreFile, alias, password, password);
+		IssuerData idata=keyStoreService.readIssuerFromStore(keyStoreFile, alias, password, password);
 		System.out.println("prosao citanje iss iz keystora");
 		// isad imamo issuer data na osnovu ser broja kao... 
 		//imamo entitet za koji treba da generisemo subjectData
@@ -127,7 +141,7 @@ public class CertificateServiceImp implements CertificateService{
 
 		System.out.println("prosao generisanje sujdata");
 		sd.setSerialNumber(certData.getSerialNumber());
-		X509Certificate cert= generateCACertificate(id, sd, canIssueCA);
+		X509Certificate cert= generateCACertificate(idata, sd, canIssueCA);
 		
 		KeyStoreDTO ksdto= new KeyStoreDTO();
 		ksdto.setFileName("intermediate.jks");
@@ -144,7 +158,7 @@ public class CertificateServiceImp implements CertificateService{
 		//zelimo u tabelu CertificateData da upisemo podatke o ovom sertifikatu
 		System.out.println("radi do certificate data");
 		String issuersubjectName="";
-		issuersubjectName=id.getX500name().toString();
+		issuersubjectName=idata.getX500name().toString();
 		issuersubjectName=issuersubjectName.split(",")[0];
 		issuersubjectName=issuersubjectName.split("=")[1];
 		certData.setCA(true);
@@ -165,12 +179,14 @@ public class CertificateServiceImp implements CertificateService{
 		certData.setPubKey(sd.getPublicKey());
 		certDataService.saveCertificateData(certData);
 		System.out.println(issuersubjectName);
+		System.out.println(cert);
 		return;
 		
 	}
 	
 	@Override
-	public void createCertificate(DigEntity subjectEntity, int SNIssuer) throws CertIOException {
+	public void createCertificate(Long id, int SNIssuer) throws CertIOException {
+		DigEntity subjectEntity = digEntityService.findOneEntity(id);
 		
 			//samo za ovaj slucaj kejstore ce biti selfsigned, ali mora ce postojati neka baza, evidencija gde ce se ovi podaci pamtit
 					String keyStoreFile="intermediate.jks";
@@ -178,13 +194,13 @@ public class CertificateServiceImp implements CertificateService{
 					char password[]= {'a', 'd', 'm', 'i', 'n'}; 
 					//iz baze izvuce public key, jer on bi svakkao trebalo da je dostupan
 					CertificateData cd=certDataService.findBySN(SNIssuer);
-					IssuerData id=keyStoreService.readIssuerFromStore(keyStoreFile, alias, password, password);
-					id.setPublicKey(cd.getPubKey());
+					IssuerData idata=keyStoreService.readIssuerFromStore(keyStoreFile, alias, password, password);
+					idata.setPublicKey(cd.getPubKey());
 					CertificateData certData=new CertificateData();
 					SubjectData sd=subjectIssuerDataService.generateSubjectData(subjectEntity, certData.getSerialNumber());
 
 					sd.setSerialNumber(certData.getSerialNumber());
-					X509Certificate cert= generateCertificate(id, sd);
+					X509Certificate cert= generateCertificate(idata, sd);
 					
 					KeyStoreDTO ksdto= new KeyStoreDTO();
 					ksdto.setFileName("endentity.jks");
@@ -196,7 +212,7 @@ public class CertificateServiceImp implements CertificateService{
 					keyStoreService.saveKeyStore(ksdto);
 					
 					String issuersubjectName="";
-					issuersubjectName=id.getX500name().toString();
+					issuersubjectName=idata.getX500name().toString();
 					issuersubjectName=issuersubjectName.split(",")[0];
 					issuersubjectName=issuersubjectName.split("=")[1];
 					certData.setCA(false);
@@ -212,18 +228,18 @@ public class CertificateServiceImp implements CertificateService{
 					certData.setToDate((java.util.Date) cert.getNotAfter());
 					certData.setPubKey(sd.getPublicKey());
 					System.out.println(sd.getPublicKey());
-					System.out.println(id.getPublicKey());
+					System.out.println(idata.getPublicKey());
 					
 					certDataService.saveCertificateData(certData);
-					certData = null;
-					certData = certDataService.findBySN(3);
-					System.out.println(certData.getPubKey());
+					
 					return;
 	
 	}
 	
-	public X509Certificate generateSelfSignedCertificate(IssuerData idata) throws ParseException, CertIOException {
+	//ovdemisad izlazi eksepsn, i nece da napravi sertifikat
+	public X509Certificate generateSelfSignedCertificate(IssuerData idata, int sn) throws ParseException, CertIOException {
 		try {
+			System.out.println("serisji broj "+sn);
 			JcaContentSignerBuilder builder = new JcaContentSignerBuilder("SHA256WithRSAEncryption");
 			builder = builder.setProvider("BC");
 
@@ -234,7 +250,7 @@ public class CertificateServiceImp implements CertificateService{
 			Date endDate = iso8601Formater.parse("2030-12-31");
 			//Postavljaju se podaci za generisanje sertifiakta
 			X509v3CertificateBuilder certGen = new JcaX509v3CertificateBuilder(idata.getX500name(),
-					new BigInteger("0"),
+					new BigInteger(Integer.toString(sn)),
 					startDate,
 					endDate,
 					idata.getX500name(),

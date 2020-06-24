@@ -1,4 +1,4 @@
-package com.example.bsep2020.security;
+/*package com.example.bsep2020.security;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -34,10 +34,10 @@ public class SQLiSafeConstraintValidator implements ConstraintValidator<SQLiSafe
 	            "(?i)(.*)(\\b)+RELEASE(\\b)+(\\s)*(" + SQL_TYPES.replaceAll(",", "|") + ")(\\b)+\\s.*(.*)",
 	            "(?i)(.*)(\\b)+DESC(\\b)+(\\w)*\\s.*(.*)",
 	            "(?i)(.*)(\\b)+DESCRIBE(\\b)+(\\w)*\\s.*(.*)",
-	            "(.*)(/\\*|\\*/|;){1,}(.*)",
-	            "(.*)(-){2,}(.*)",
-	    };
-	 
+	//            "(.*)(/\\*|\\*/ //DODATEDVEKOSEEEE|;){1,}(.*)",
+	//            "(.*)(-){2,}(.*)",
+	  //  };
+	 /*
 	// pre-build the Pattern objects for faster validation
 	    private List<Pattern> validationPatterns = getValidationPatterns();
 
@@ -77,3 +77,4 @@ public class SQLiSafeConstraintValidator implements ConstraintValidator<SQLiSafe
 	        return cs == null || cs.length() == 0;
 	    }
 }
+*/

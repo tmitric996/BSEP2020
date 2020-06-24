@@ -1,4 +1,4 @@
-package com.example.bsep2020.security;
+/*package com.example.bsep2020.security;
 
 public class CertificateDataValidator {
 	
@@ -9,3 +9,4 @@ public class CertificateDataValidator {
                 && (str.matches("^[a-zA-Z]*$"))); 
     } 
 }
+*/

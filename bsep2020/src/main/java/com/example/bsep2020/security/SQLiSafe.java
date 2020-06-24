@@ -1,4 +1,4 @@
-package com.example.bsep2020.security;
+/*package com.example.bsep2020.security;
 
 import javax.validation.*;
 import java.lang.annotation.*;
@@ -14,4 +14,4 @@ public @interface SQLiSafe {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
-}
+}*/

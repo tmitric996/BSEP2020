@@ -22,40 +22,40 @@ public class DigEntity {
 	@Id
 	@Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
     private Long id;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	public String commonName;
 	
 	@Enumerated
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	public EntityType entityType;
 	//zavisno kog je tipa entitet neka polja ce biti prazna...ali neka polja ce uvek biti popunjena poput commonname cn i sl
 	
 	@Column
-	@NotNull
+	//@NotNull
 	private String surname;
 	
 	@Column
 	private String givenName;
 	
 	@Column
-	@NotNull
+	//@NotNull
 	private String organization;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	private String organizationUnitName;
 	
 	@Column
-	@Size(max = 2, message = "Potrebno je uneti samo dva slova!")
+	//@Size(max = 2, message = "Potrebno je uneti samo dva slova!")
 	private String countryCode;
 	
 	//   email address in Verisign certificates
 	@Column
-	@Email(message = "Unesite validnu email adresu!")
+	//@Email(message = "Unesite validnu email adresu!")
 	private String email;
 	
 	

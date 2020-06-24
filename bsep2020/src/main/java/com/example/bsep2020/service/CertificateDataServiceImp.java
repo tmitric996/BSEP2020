@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bsep2020.model.CertificateData;
 import com.example.bsep2020.repository.CertificateDataRepository;
-import com.example.bsep2020.security.CertificateDataValidator;
+//import com.example.bsep2020.security.CertificateDataValidator;
 
 @Service
 public class CertificateDataServiceImp implements CertificateDataService {
@@ -18,11 +18,11 @@ public class CertificateDataServiceImp implements CertificateDataService {
 	
 	@Override
 	public CertificateData saveCertificateData(CertificateData certData) {
-		if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getIssuerName())) {
-			System.out.println("Potrebno je uneti samo slova!");
-		}else if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())){
-			System.out.println("Potrebno je uneti samo slova!");
-		}
+//		if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getIssuerName())) {
+	//		System.out.println("Potrebno je uneti samo slova!");
+		//}else if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())){
+			//System.out.println("Potrebno je uneti samo slova!");
+	//	}
 		
 		return certDataRepository.save(certData);
 	}

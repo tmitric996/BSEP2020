@@ -145,19 +145,22 @@ public class KeyStoreServiceImp implements KeyStoreService{
     public Certificate readCertificate(String keyStoreFile, String keyStorePass, String alias) {
 		try {
 			//ova tri reda obrisi , ovako testiras jer si glupa pane znas lepo u jsonu poslati
-			//keyStoreFile="selfsigned.jks";
-			//keyStorePass="admin";
-			//alias="selfsigned";
+			/*keyStoreFile="selfsigned.jks";
+			keyStorePass="admin";
+			alias="selfsigned";*/
+			System.out.println(keyStoreFile + keyStorePass + alias);
 			//kreiramo instancu KeyStore
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 			//ucitavamo podatke
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile));
+			System.out.println("nasao keystore");
 			ks.load(in, keyStorePass.toCharArray());
 			
 			if(ks.isKeyEntry(alias)) {
 				Certificate cert = ks.getCertificate(alias);
-				//System.out.println("radi");
-				//System.out.println(cert.getPublicKey().toString());
+				System.out.println("radi");
+				System.out.println(cert.getPublicKey().toString()
+						+ cert.toString() );
 				return cert;
 			}
 			System.out.println("nije usp u if");
