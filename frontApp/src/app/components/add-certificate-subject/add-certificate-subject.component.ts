@@ -21,7 +21,7 @@ export class AddCertificateSubjectComponent implements OnInit {
     this.submitted = false;
 
     this.certificateSubjectForm = new FormGroup({
-      commonName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      commonName: new FormControl(' ', [Validators.required, Validators.minLength(5)]),
       entityType: new FormControl(),
       surname: new FormControl(),
       givenName: new FormControl(),
