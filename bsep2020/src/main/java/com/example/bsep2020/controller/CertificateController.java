@@ -48,11 +48,11 @@ public class CertificateController {
 		SNIssuer=sp[3];
 		String canIss=sp[5];
 		boolean canIssueCA=false;
-		System.out.println(canIss);
 		if (canIss=="true") {canIssueCA=true;}
 		certService.createCACert(Long.parseLong(id), Integer.parseInt(SNIssuer), canIssueCA);
 	}
 	
+	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/writeee")
 	public void writeCert(@Valid @RequestBody String id, String SNIssuer) throws Exception {
 		//privremena metoda mozesposle izmeniti kada bude front da prima long i int

@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class OCSPTable {
 
 	@Id
@@ -17,6 +19,6 @@ public class OCSPTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	private String serialNumber;
+	private int serialNumber;
 	
 }

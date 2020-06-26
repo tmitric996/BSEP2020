@@ -4,6 +4,6 @@ import com.example.bsep2020.model.OCSPTable;
 
 public interface OCSPService {
 
-	OCSPTable saveOCSP(OCSPTable ocspTable);
+	OCSPTable saveOCSP(int sn);
 
 }

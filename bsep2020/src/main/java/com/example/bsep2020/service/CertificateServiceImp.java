@@ -11,6 +11,7 @@ import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.Extension;
@@ -119,7 +120,7 @@ public class CertificateServiceImp implements CertificateService{
 		SubjectData sd=subjectIssuerDataService.generateSubjectData(subjectEntity, certData.getSerialNumber());
 		sd.setSerialNumber(certData.getSerialNumber());
 		X509Certificate cert= generateCACertificate(idata, sd, canIssueCA);
-		
+	
 		KeyStoreDTO ksdto= new KeyStoreDTO();
 		//try kec za lodovanje jks
 		ksdto.setFileName("intermediate.jks");
@@ -207,9 +208,11 @@ public class CertificateServiceImp implements CertificateService{
 			certData.setFromDate((java.util.Date) cert.getNotBefore());
 			certData.setToDate((java.util.Date) cert.getNotAfter());
 			certData.setPubKey(sd.getPublicKey());
-
+			
 			certDataService.saveCertificateData(certData);
 			System.out.println(cert);
+			System.out.println(validCAs().toString());
+			System.out.println(validISSuerForCAs().toString());
 			return;
 	
 	}
@@ -334,6 +337,32 @@ public class CertificateServiceImp implements CertificateService{
 		
 	}
 
-
+	//nije testirano, malo je tesirano
+	public List<CertificateData> validCAs(){ //pored ovoga mora i provera datuma
+		List<CertificateData> temp= certDataService.findAllCertData();
+		List<CertificateData> CAs= certDataService.findAllCertData();
+		CAs.removeAll(temp);
+		java.util.Date date=new java.util.Date(); 
+		for (CertificateData certs : temp) {
+			if (certs.isCA()==true && certs.isRevoken()==false && certs.getToDate().after(date) && certs.getFromDate().before(date)) {
+				CAs.add(certs);
+			}
+		}
+		return CAs;
+	}
+	
+	//nije testirano,malo je tesirano
+	public List<CertificateData> validISSuerForCAs(){ //pored ovoga mora i provera datuma
+		List<CertificateData> temp= certDataService.findAllCertData();
+		List<CertificateData> CAs= certDataService.findAllCertData();
+		CAs.removeAll(temp);
+		java.util.Date date=new java.util.Date(); 
+		for (CertificateData certs : temp) {
+			if (certs.isCanIssueCA()==true && certs.isCA()==true && certs.isRevoken()==false && certs.getToDate().after(date) && certs.getFromDate().before(date)) {
+				CAs.add(certs);
+			}
+		}
+		return CAs;
+	}
 
 }

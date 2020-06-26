@@ -79,8 +79,8 @@ public class MainController {
 	OCSPService ocspService;
 	
 	@PostMapping("/newocsp")
-	public OCSPTable addToOCSP(@Valid @RequestBody OCSPTable ocspTable) {
-		return ocspService.saveOCSP(ocspTable);
+	public OCSPTable addToOCSP(@Valid @RequestBody int sn) {
+		return ocspService.saveOCSP(sn);
 	}
 	
 	@Autowired
