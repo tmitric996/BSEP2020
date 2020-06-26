@@ -23,7 +23,7 @@ public class CertificateDataServiceImp implements CertificateDataService {
 		//}else if(!CertificateDataValidator.isStringOnlyAlphabet(certData.getSubjectName())){
 			//System.out.println("Potrebno je uneti samo slova!");
 	//	}
-		
+		System.out.println(certData.getSerialNumber());
 		return certDataRepository.save(certData);
 	}
 	

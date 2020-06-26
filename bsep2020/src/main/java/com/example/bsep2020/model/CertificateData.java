@@ -27,44 +27,43 @@ public class CertificateData {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-//	@NotNull(message = "Obavezno polje!")
 	private int serialNumber;
 	
 	
 	@Column(nullable=false, unique=true)
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private String subjectName;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private String issuerName;
 	
 	@Column(length = 2048)
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	private PublicKey pubKey;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private java.util.Date fromDate;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private java.util.Date toDate;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	private boolean isRoot;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private boolean isCA;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+	//@NotNull(message = "Obavezno polje!")
 	private boolean canIssueCA;
 	
 	@Column
-	@NotNull(message = "Obavezno polje!")
+//	@NotNull(message = "Obavezno polje!")
 	private boolean isRevoken;
 	
 	
@@ -84,6 +83,10 @@ public class CertificateData {
 		this.canIssueCA=canca;
 		this.isRevoken=rev;
 		this.pubKey=pk;
+	}
+	
+	public CertificateData(int sn) {
+		this.serialNumber=sn;
 	}
 
 	public int getSerialNumber() {

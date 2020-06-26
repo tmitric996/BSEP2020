@@ -23,6 +23,7 @@ public class CertificateDataController {
 	//ova metodace se zaprao pozivati kad kreiram sertifikat,pa ovo se cuva u bazi a sertifikat u keystory
 	@PostMapping
 	public CertificateData addCertData(@Valid @RequestBody CertificateData certData) {
+		System.out.println(certData.getSerialNumber());
 		return certDataService.saveCertificateData(certData);
 	}
 	

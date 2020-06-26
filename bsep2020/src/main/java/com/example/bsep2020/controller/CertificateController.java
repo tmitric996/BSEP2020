@@ -42,19 +42,24 @@ public class CertificateController {
 	}
 
 	@PostMapping("/writeint")
-	public void writeCACert(@Valid @RequestBody Long id) throws Exception {
-		//privremena metoda
-		int SNIssuer = 1;
+	public void writeCACert(@Valid @RequestBody String id, String SNIssuer) throws Exception {
+		String []sp= id.split("\"");
+		id=sp[1];
+		SNIssuer=sp[3];
+		String canIss=sp[5];
 		boolean canIssueCA=false;
-		certService.createCACert(id, SNIssuer, canIssueCA);
+		System.out.println(canIss);
+		if (canIss=="true") {canIssueCA=true;}
+		certService.createCACert(Long.parseLong(id), Integer.parseInt(SNIssuer), canIssueCA);
 	}
 	
 	@PostMapping("/writeee")
-	public void writeCert(@Valid @RequestBody Long id ) throws Exception {
-		//privremena metoda
-		System.out.println(id);
-		int SNIssuer = 2;
-		certService.createCertificate(id, SNIssuer);
+	public void writeCert(@Valid @RequestBody String id, String SNIssuer) throws Exception {
+		//privremena metoda mozesposle izmeniti kada bude front da prima long i int
+		String []sp= id.split("\"");
+		id=sp[1];
+		SNIssuer=sp[3];
+		certService.createCertificate(Long.parseLong(id), Integer.parseInt(SNIssuer));
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")

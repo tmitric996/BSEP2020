@@ -4,6 +4,6 @@ import com.example.bsep2020.model.CertificateData;
 
 public interface CertificateDataService {
 
-	CertificateData saveCertificateData(CertificateData certData);
+	public CertificateData saveCertificateData(CertificateData certData);
 
 }
